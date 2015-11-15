@@ -1,0 +1,27 @@
+#pizza-info {
+    position: absolute;
+    /*background-color: green;*/
+	width: 150px;
+	height: 100px;
+    right: 0px;
+    top: 0px;
+}
+
+#pizza-info .content {
+	display: block;
+	position: relative;
+	text-align: center;
+	animation-duration: 1s;
+	animation-name: slidein;
+}
+
+@keyframes slidein {
+	from {
+		transform: translate(0, 20px);
+        opacity: 0;
+	}
+	to {
+		transform: translate(0, 0);
+        opacity: 1;
+	}
+}

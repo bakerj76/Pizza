@@ -1,0 +1,59 @@
+{
+	"Friends":
+	{
+		"parentDecisions": null,
+		"moneyRequirement": 0,
+		"pizzaRequirement": 1,
+		"timeRequirement": null,
+		"flags":
+		{
+			"true": [],
+			"false": []
+		},
+		"text": "Congratulations! You made a pizza.",
+		"buttons": [
+			"Yes",
+			"No"
+		],
+		"style": "binary",
+		"consequenceFunctions": [
+			{
+				"name": "",
+				"parameters": []
+			},
+			{
+				"name": "",
+				"parameters": []
+			}
+		]
+	},
+
+	"Friends 2":
+	{
+		"parentDecisions": ["Friends"],
+		"moneyRequirement": 0,
+		"pizzaRequirement": 10,
+		"timeRequirement": null,
+		"flags":
+		{
+			"true": [],
+			"false": []
+		},
+		"text": "adf",
+		"buttons": [
+			"Yes",
+			"No"
+		],
+		"style": "binary",
+		"consequenceFunctions": [
+			{
+				"name": "",
+				"parameters": []
+			},
+			{
+				"name": "",
+				"parameters": []
+			}
+		]
+	}
+}

@@ -1,0 +1,20 @@
+.badge {
+    position: relative;
+	width: 14px;
+	height: 16px;
+	top: 28px;
+	left: 28px;
+	border-radius: 3px;
+	background-color: hsl(348,67%,49%);
+	pointer-events: none;
+}
+
+.badge .badge-text {
+    position: absolute;
+	width: 100%;
+	text-align: center;
+	top: 50%;
+	transform: translate(0, -50%);
+	font-size: 0.75em;
+    font-weight: 800;
+}

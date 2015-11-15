@@ -1,0 +1,37 @@
+.menu-button {
+	background-color: hsl(228,27%,18%);
+	position: relative;
+	width: 48px;
+	height: 48px;
+	animation: fadein 0.5s ease;
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.menu-button:hover, .menu-button.selected {
+	background-color: hsl(228,27%,37%);
+	cursor: pointer;
+}
+
+.menu-button:active {
+	background-color: hsl(214,28%,46%);
+}
+
+.menu-button .material-icons {
+	position: absolute;
+	font-size: 2em;
+	width: 32px;
+	height: 32px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-user-select: none;
+	pointer-events: none;
+}

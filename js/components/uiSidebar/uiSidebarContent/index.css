@@ -1,0 +1,8 @@
+#sidebar-content {
+    background-color: hsl(228,27%,37%);
+    width: 100%;
+    height: 100%;
+    margin-left: 48px;
+    pointer-events: all;
+    padding: 16px;
+}

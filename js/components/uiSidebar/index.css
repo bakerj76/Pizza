@@ -1,0 +1,30 @@
+#sidebar-space {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	pointer-events: none;
+}
+
+#sidebar {
+	background-color: hsl(228,27%,18%);
+	float: left;
+	width: 48px;
+	height: 100%;
+	animation: slidein-from-left 0.5s ease;
+	pointer-events: all;
+}
+
+#sidebar :nth-child(1) {
+	animation-delay: 0.5s;
+	animation-fill-mode: backwards;
+}
+
+@keyframes slidein-from-left {
+	from {
+		transform: translate(-100%, 0);
+	}
+	to {
+		transform: translate(0, 0);
+	}
+}

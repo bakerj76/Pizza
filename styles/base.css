@@ -1,0 +1,44 @@
+/*
+B:  hsl(214,28%,46%)
+LB: hsl(203,22%,81%)
+DB: hsl(228,27%,18%)
+R:  hsl(348,67%,49%)
+Br: hsl(36,45%,68%)
+*/
+
+* {
+	font-family: 'Oxygen';
+	font-weight: 400;
+	color: hsl(203,22%,81%);
+	-webkit-user-select: none;
+	cursor: default;
+	z-index: 0;
+}
+
+html {
+	overflow: hidden;
+}
+
+html, body, #content, #game {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+#content, #game {
+	width: 100%;
+	height: 100%;
+}
+
+#game {
+	background-color: hsl(214,28%,46%);
+}
+
+button {
+	box-shadow: none;
+	border: none;
+}
+
+button:focus {
+	outline: none;
+}
