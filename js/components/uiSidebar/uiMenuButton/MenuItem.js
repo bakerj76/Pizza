@@ -14,14 +14,14 @@ export default class MenuItem {
 		this.title = title;
 		this.icon = icon;
 		this.view = view;
-		this.badgeCount = 0;
 	}
 
 	/**
 	 * Gets the React component to render to the sidebar-content div.
-	 * @return {Component} The view React component.
+	 * @param {GameManager} gameManager The main game manager.
+	 * @return {Component}              The view React component.
 	 */
-	getView() {
-		return <this.view />;
+	getView(gameManager) {
+		return <this.view gameManager={gameManager}/>;
 	}
 }

@@ -8,9 +8,9 @@ export default class GameManager {
 	constructor() {
 		this.decisionManager = new DecisionManager();
 		this._pizzaCount = 0;
-		this.IconFlags = new FlagEnum('Decisions', 'Finances', 'Standing',
+		this.iconFlags = new FlagEnum('Decisions', 'Finances', 'Standing',
 		    'Statistics');
-		this.LabelFlags = new FlagEnum('Time', 'PizzaCount', 'Money',
+		this.labelFlags = new FlagEnum('Time', 'PizzaCount', 'Money',
 		    'DeltaMoney');
 
 		/**
@@ -18,6 +18,15 @@ export default class GameManager {
 		 */
 		this.onClick = () => {
 			this._onClick();
+		};
+
+		/**
+		 * Callback when the user makes a decision.
+		 * @param  {string} decision The decision name.
+		 * @param  {int}    choice   The choice the user made.
+		 */
+		this.onDecide = (decision, choice) => {
+			this._onDecide(decision, choice);
 		};
 	}
 
@@ -42,10 +51,15 @@ export default class GameManager {
 		this.pizzaCount++;
 
 		if (this.pizzaCount > 0) {
-			this.IconFlags.setFlag(this.IconFlags.Decisions);
+			this.iconFlags.setFlag(this.iconFlags.Decisions);
+			this.labelFlags.setFlag(this.labelFlags.PizzaCount);
 		}
 	}
 
+	_onDecide(decision, choice) {
+		console.log("Decision made: " + decision + ", " + choice);
+		this.decisionManager.addCompletedDecision(this, decision, choice);
+	}
 
 	/**
 	 * Rerenders the PizzaApp component.

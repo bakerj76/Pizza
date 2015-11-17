@@ -1,5 +1,6 @@
 import './index.css';
 
+import FlagEnum from 'game/FlagEnum';
 import InfoLabel from './uiInfoLabel';
 import React from 'react';
 
@@ -9,22 +10,29 @@ export default class InfoPanel extends React.Component {
     }
 
     render() {
+        var gameManager = this.props.gameManager;
+        var labelFlags = gameManager.labelFlags;
+
         var timeLabel;
         var pizzaLabel;
         var moneyLabel;
         var deltaLabel;
 
-        var pizzaCount = this.props.pizzaCount + ' pizza' +
-            (this.props.pizzaCount == 1 ? '' : 's');
+        if (labelFlags.getFlag(labelFlags.Time)) {
 
-        if (this.props.gameManager) {
+        }
 
+        if (labelFlags.getFlag(labelFlags.PizzaCount)) {
+            var pizzaCount = gameManager.pizzaCount + ' pizza' +
+                (gameManager.pizzaCount == 1 ? '' : 's');
+
+            pizzaLabel = <InfoLabel enabled={true}
+                value={pizzaCount} />;
         }
 
         return (
             <div id='pizza-info' className='panel-list'>
-                <InfoLabel enabled={true}
-                    value={pizzaCount} />
+                {pizzaLabel}
             </div>
         );
     }

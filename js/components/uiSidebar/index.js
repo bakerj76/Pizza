@@ -1,6 +1,6 @@
 import './index.css';
 
-import FlagEnum from 'game/FlagEnum'
+import FlagEnum from 'game/FlagEnum';
 import MenuItem from './uiMenuButton/MenuItem';
 import MenuButton from './uiMenuButton';
 import SidebarContent from './uiSidebarContent';
@@ -36,6 +36,7 @@ export default class Sidebar extends React.Component {
 
     onClick(e, index, menuItem)
     {
+        var gameManager = this.props.gameManager;
         var element = e.target;
 
         if (this.state.isActive) {
@@ -49,7 +50,7 @@ export default class Sidebar extends React.Component {
                 // change the overlay.
                 this.setState({
                     overlay: index,
-                    currentView: menuItem.getView()
+                    currentView: menuItem
                 });
                 this._setSelected(element);
             }
@@ -58,7 +59,7 @@ export default class Sidebar extends React.Component {
             this.setState({
                 isActive: true,
                 overlay: index,
-                currentView: menuItem.getView()
+                currentView: menuItem
             });
             this._setSelected(element);
         }
@@ -108,15 +109,30 @@ export default class Sidebar extends React.Component {
      * @return {MenuButton} A react menu button component.
      */
     _createMenuButton(value, index) {
-        var iconFlags = this.props.gameManager.IconFlags;
+        var gameManager = this.props.gameManager;
+        var iconFlags = gameManager.iconFlags;
+        var flag = FlagEnum.indexToFlag(index);
 
-        if (iconFlags.getFlag(FlagEnum.indexToFlag(index))) {
+        if (iconFlags.getFlag(flag)) {
+            var badgeCount = 0;
+
+            switch (flag) {
+                case iconFlags.Decisions:
+                    let pendingDecisions = gameManager
+                        .decisionManager
+                        .pendingDecisions;
+                    badgeCount = Object.keys(pendingDecisions).length;
+                    break;
+                default:
+                    break;
+            }
+
             return (
                 <MenuButton key={'menu-icon-' + index}
                     title={value.title}
                     icon={value.icon}
                     onClick={(e) => this.onClick(e, index, value)}
-                    badgeCount={value.badgeCount} />
+                    badgeCount={badgeCount} />
             );
         }
     }
@@ -124,7 +140,8 @@ export default class Sidebar extends React.Component {
     render() {
         var overlay;
         var sidebar;
-        var iconFlags = this.props.gameManager.IconFlags;
+        var gameManager = this.props.gameManager;
+        var iconFlags = gameManager.iconFlags;
 
         // If there aren't any icons, don't show the sidebar.
         if (iconFlags.value !== 0) {
@@ -137,7 +154,8 @@ export default class Sidebar extends React.Component {
 
         // Show the overlay if it's active.
         if (this.state.isActive && this.state.currentView) {
-            overlay = <SidebarContent view={this.state.currentView} />;
+            overlay = <SidebarContent
+                view={this.state.currentView.getView(this.props.gameManager)}/>;
         }
 
 		return (

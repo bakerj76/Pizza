@@ -20,17 +20,18 @@
 			{
 				"name": "",
 				"parameters": []
-			},
-			{
-				"name": "",
-				"parameters": []
 			}
 		]
 	},
 
 	"Friends 2":
 	{
-		"parentDecisions": ["Friends"],
+		"parentDecisions": [
+			{
+				"name": "Friends",
+				"choice": 0
+			}
+		],
 		"moneyRequirement": 0,
 		"pizzaRequirement": 10,
 		"timeRequirement": null,

@@ -6,9 +6,10 @@ import Badge from 'components/uiBadge';
 export default class MenuButton extends React.Component {
 	render() {
 		var badge;
+		var badgeCount = this.props.badgeCount;
 
-		if (this.props.badgeCount !== 0) {
-			badge = <Badge count={this.props.badgeCount}/>;
+		if (badgeCount && badgeCount !== 0) {
+			badge = <Badge count={badgeCount}/>;
 		}
 
 		return (
