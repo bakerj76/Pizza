@@ -12,9 +12,10 @@ export default class Decision extends React.Component {
     createButtons(button, index) {
         var onDecide = this.props.onDecide;
         var name = this.props.name;
+        var decision = this.props.decision;
 
         return (
-            <button key={index} onClick={(e) => onDecide(name, index)}>
+            <button key={index} onClick={(e) => onDecide(name, decision, index)}>
                 {button}
             </button>
         );

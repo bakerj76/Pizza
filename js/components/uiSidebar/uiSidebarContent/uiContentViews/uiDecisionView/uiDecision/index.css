@@ -1,8 +1,8 @@
 .decision {
     background-color: hsl(228,27%,18%);
-    margin-right: 80px;
     padding: 16px;
     border-radius: 16px;
+    margin-bottom: 16px;
 }
 
 .decision p {
@@ -10,13 +10,11 @@
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     padding-left: 16px;
+    -webkit-user-select: text;
+    cursor: auto;
 }
 
 .buttons.binary {
-    position: relative;
-    margin-left: auto;
-    margin-right: 0;
-    width: 128px;
 }
 
 .buttons button {

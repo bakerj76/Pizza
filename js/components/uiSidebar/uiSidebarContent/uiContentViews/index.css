@@ -8,4 +8,6 @@ h2 {
     font-size: 1.25em;
     font-weight: 400;
     margin: 0;
+    -webkit-user-select: text;
+    cursor: auto;
 }

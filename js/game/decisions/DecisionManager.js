@@ -4,6 +4,7 @@ import data from 'decisions.json';
 // "Name" :
 // {
 //     parentDecisions: [{"Name", Choice}, {"Name2", Choice2}],
+//     blockingDecisions: [{"Name", Choice}]
 //     moneyRequirement: required dollar amount,
 //     pizzaRequirement: required pizza count,
 //     timeRequirement: required time interval,
@@ -28,7 +29,9 @@ import data from 'decisions.json';
 // }
 
 export default class DecisionManager {
-    constructor() {
+    constructor(gameManager) {
+        this.gameManager = gameManager;
+
         /**
          * The next decisions to check game parameters against.
          * @type {Array}
@@ -47,6 +50,7 @@ export default class DecisionManager {
      * Sets up the active decisions.
      */
     findActiveDecisions() {
+        var changed = false;
         // Loop through all missions,
         for (let key in data) {
             let value = data[key];
@@ -61,17 +65,37 @@ export default class DecisionManager {
             if (!parentDecisions) {
                 this.addActiveDecision(key, value);
             } else {
-                // See if we meet the tree requirements of this decision
-                for (let i = 0; i < parentDecisions.length; i++) {
-                    var requirement = parentDecisions[i];
-
-                    if (!this._parentsSatisfied(requirement)) {
-                        return;
-                    }
+                if (this._allRequirementsSatisfied(value)) {
+                    this.addActiveDecision(key, value);
+                    changed = true;
                 }
-                this.addActiveDecision(key, value);
             }
         }
+
+        if (changed) {
+            this.checkActiveDecisions();
+        }
+    }
+
+    _allRequirementsSatisfied(decision) {
+        let parentDecisions = decision.parentDecisions;
+
+        // See if we meet the tree requirements of this decision
+        for (let i = 0; i < parentDecisions.length; i++) {
+            var requirement = parentDecisions[i];
+
+            if (!requirement.choice) {
+                if (Object.keys(this.activeDecisions).indexOf(requirement.name) === -1) {
+                    return false;
+                }
+            } else {
+                if (!this._parentsSatisfied(requirement)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     _parentsSatisfied(parentDecision) {
@@ -107,13 +131,15 @@ export default class DecisionManager {
      * Checks to see if any active decisions are completed/failed.
      * @param {GameManager} The main game manager.
      */
-    checkActiveDecisions(gameManager) {
+    checkActiveDecisions() {
         // Go through the active decisions.
         for (let name in this.activeDecisions) {
             let decision = this.activeDecisions[name];
 
             // If the game currently meets the requirements, add it to pending.
-            if (decision.pizzaRequirement >= gameManager.pizzaCount) {
+            if ((!decision.pizzaRequirement || this.gameManager.pizzaCount >= decision.pizzaRequirement) &&
+                (!decision.moneyRequirement || this.gameManager.money >= decision.moneyRequirement) &&
+                (!decision.timeRequirement || this.gameManager.time >= decision.timeRequirement)) {
                 this.addPendingDecision(name, decision);
             }
         }
@@ -129,12 +155,16 @@ export default class DecisionManager {
         delete this.activeDecisions[name];
     }
 
-    addCompletedDecision(gameManager, name, choice) {
-        this.completedDecisions.push({name: name, choice: choice});
+    addCompletedDecision(name, decision, choice) {
+        this.completedDecisions.push({
+            name: name,
+            decision: decision,
+            choice: choice
+        });
         delete this.pendingDecisions[name];
 
         // If we completed a decision, find the new active decisions.
         this.findActiveDecisions();
-        gameManager.draw();
+        this.gameManager.draw();
     }
 }

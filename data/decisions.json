@@ -1,60 +1,49 @@
 {
 	"Friends":
 	{
-		"parentDecisions": null,
-		"moneyRequirement": 0,
+		"blockingDecisions": [
+			{
+				"name": "Too Many Pizzas"
+			}
+		],
 		"pizzaRequirement": 1,
-		"timeRequirement": null,
-		"flags":
-		{
-			"true": [],
-			"false": []
-		},
-		"text": "Congratulations! You made a pizza.",
+		"text": "You take the pizza out of the oven, cooked, cheesy, delicious. You take a spatula and you put the burning pizza down on a cutting board. You have your way with it, cutter in hand. But, as you slice it, you realize there's too much pizza for just you. You look at the various pictures on your refrigerator, which remind you that you have friends. You remember them now and all of the great times you had together. Do you invite them over to help you eat the pizza?",
 		"buttons": [
 			"Yes",
 			"No"
 		],
-		"style": "binary",
-		"consequenceFunctions": [
-			{
-				"name": "",
-				"parameters": []
-			}
-		]
+		"style": "binary"
 	},
 
-	"Friends 2":
+	"Too Many Pizzas":
 	{
 		"parentDecisions": [
 			{
 				"name": "Friends",
-				"choice": 0
+				"choice": null
 			}
 		],
-		"moneyRequirement": 0,
-		"pizzaRequirement": 10,
-		"timeRequirement": null,
-		"flags":
-		{
-			"true": [],
-			"false": []
-		},
-		"text": "adf",
+		"pizzaRequirement": 2,
+		"text": "Before even deciding what to do with the pizza, you make another one. Now you have two pizzas, with no real idea what to do with them. This will require at least 7 more people or 1-2 eating contest contestants.",
 		"buttons": [
-			"Yes",
-			"No"
+			"Oops."
 		],
-		"style": "binary",
-		"consequenceFunctions": [
+		"style": "dismiss"
+	},
+
+	"Alone":
+	{
+		"pizzaRequirement": 1,
+		"parentDecisions": [
 			{
-				"name": "",
-				"parameters": []
-			},
-			{
-				"name": "",
-				"parameters": []
+				"name": "Friends",
+				"choice": 1
 			}
-		]
+		],
+		"text": "You decide against it. You're not sure if you can trust them -- art isn't something they understand. You solemnly take a slice of the pizza and begin eating it, alone. You realize your infinite solitude in this world full of people. You take another slice; it's comforting. But that comfort turns to panic as you realize you still have 3/4ths of a pizza left. You wrap each slice up in Saran™ wrap and stick all 6 individual pieces in the refrigerator, with the pictures of your friends filling you with an unusual sort of regret for not calling them over. But they probably would have insulted your pizza, without regard to your feelings.",
+		"buttons": [
+			"Ok..."
+		],
+		"style": "dismiss"
 	}
 }

@@ -6,8 +6,11 @@ import ReactDOM from 'react-dom';
 
 export default class GameManager {
 	constructor() {
-		this.decisionManager = new DecisionManager();
+		this.decisionManager = new DecisionManager(this);
 		this._pizzaCount = 0;
+		this.money = 0;
+		this.time = 0;
+
 		this.iconFlags = new FlagEnum('Decisions', 'Finances', 'Standing',
 		    'Statistics');
 		this.labelFlags = new FlagEnum('Time', 'PizzaCount', 'Money',
@@ -25,8 +28,8 @@ export default class GameManager {
 		 * @param  {string} decision The decision name.
 		 * @param  {int}    choice   The choice the user made.
 		 */
-		this.onDecide = (decision, choice) => {
-			this._onDecide(decision, choice);
+		this.onDecide = (name, decision, choice) => {
+			this._onDecide(name, decision, choice);
 		};
 	}
 
@@ -37,7 +40,7 @@ export default class GameManager {
 	set pizzaCount(value) {
 		this._pizzaCount = value;
 		this.draw();
-		this.decisionManager.checkActiveDecisions(this);
+		this.decisionManager.checkActiveDecisions();
 	}
 
 	/**
@@ -56,9 +59,9 @@ export default class GameManager {
 		}
 	}
 
-	_onDecide(decision, choice) {
-		console.log("Decision made: " + decision + ", " + choice);
-		this.decisionManager.addCompletedDecision(this, decision, choice);
+	_onDecide(name, decision, choice) {
+		console.log("Decision made: " + name + ", " + choice);
+		this.decisionManager.addCompletedDecision(name, decision, choice);
 	}
 
 	/**

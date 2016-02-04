@@ -8,11 +8,13 @@
 
 #sidebar {
 	background-color: hsl(228,27%,18%);
+	position: fixed;
 	float: left;
 	width: 48px;
 	height: 100%;
 	animation: slidein-from-left 0.5s ease;
 	pointer-events: all;
+	z-index: 2;
 }
 
 #sidebar :nth-child(1) {
